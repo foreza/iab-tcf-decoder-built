@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IAB Decoder Test</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+
+    <!-- Include library on test page -->
+    <script src="./dist/TCStringDecoder.js"></script>
+</head>
+
+<body>
+    <p>Check the Developer Console</p>
+    <script>
+        // Example TCString decoder usage
+
+        let encodedTCString = "CPpBrIAPpBrIAADAOBENC8CsAP_AAH7AAAAAF5wDwAAgAQAAqABwAFoAUAAwgBuAGQAQYAm4BTQDlAJ0AXmBecA0AAIAEAAKgAcABaAFAAMIAyACbgFNAOUAnQBeYAA.fkAAAAAAAAA";
+
+        let decodedTCModel;
+        let consentObject;
+
+        try {
+            decodedTCModel = TCString.decode(encodedTCString);
+
+            console.log("decodedTCModel: ", decodedTCModel);
+
+            consentObject = {
+                "purposeIds": Array.from(decodedTCModel.purposeConsents.set_),
+                "vendorIds": Array.from(decodedTCModel.vendorConsents.set_),
+                "legIntPurposeIds": Array.from(decodedTCModel.purposeLegitimateInterests.set_),
+                "legIntVendorIds": Array.from(decodedTCModel.vendorLegitimateInterests.set_),
+                "specialFeatureIds": Array.from(decodedTCModel.specialFeatureOptins.set_),
+            };
+
+            console.log("Consent Object from TCModel: ", consentObject);
+
+        } catch (e) {
+            alert("Library not built properly or there was an issue:", e)
+        }
+
+    </script>
+</body>
+
+</html>

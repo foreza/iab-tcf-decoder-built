@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@iabtcf/core": "^1.5.5",
+    "webpack": "^5.77.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.0.1"
+  }
+}
